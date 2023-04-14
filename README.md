@@ -24,6 +24,8 @@ root                    (project root folder)
 ---
 * Python 3+
 * FastAPI
+* Uvicorn
+* Virtualenv
 
 ## Author
 ---
