@@ -33,3 +33,19 @@ async def update_todo(todo_id: int, item: TodoItem) -> dict:
             todo.item = item.item
             return {"message": f"Element {todo_id} updated correctly"}
     return {"message": f"Element with ID {todo_id} doesnt exist"}
+
+
+# @todo_routes.delete("/todo")
+# delete element based on index
+# async def delete_todo(todo: int):
+#     for index in range(len(todo_list)):
+
+
+@todo_routes.delete("/todo")
+# delete all elements
+async def delete_all_todos():
+    if not todo_list:
+        return {"message": "Todo list is empty"}
+    else:
+        todo_list.clear()
+        return {"message": "List deleted succesfully"}
