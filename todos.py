@@ -1,5 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Path, HTTPException, status, Request, Depends
+from fastapi.templating import Jinja2Templates
 from model import Todo, TodoItem
+
+templates = Jinja2Templates(directory="templates/")
 
 todo_routes = APIRouter()
 
@@ -16,6 +19,14 @@ async def get_todo(todo_id: int) -> dict:
         if todo.id == todo_id:
             return {"todo": todo}
     return {"message": f"Element with ID {todo_id} doesnt exist"}
+
+
+@todo_routes.get("/todo")
+async def retrieve_todos(request: Request):
+    return templates.TemplateResponse("home.html", {
+        "request": request,
+        "todos": todo_list
+    })
 
 
 @todo_routes.post("/todo")
