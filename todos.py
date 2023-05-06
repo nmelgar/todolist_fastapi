@@ -39,14 +39,19 @@ async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)):
     })
 
 
-@todo_routes.put("/todo/{todo_id}")
-# update todo element
-async def update_todo(todo_id: int, item: TodoItem) -> dict:
-    for todo in todo_list:
-        if todo.id == todo_id:
-            todo.item = item.item
-            return {"message": f"Element {todo_id} updated correctly"}
-    return {"message": f"Element with ID {todo_id} doesnt exist"}
+# @todo_routes.put("/todo/{id}")
+# async def update_todo(id: int, new_todo: str):
+#     todo_list[id] = new_todo
+#     return {"message": "Todo updated successfully"}
+
+# @todo_routes.put("/todo/{todo_id}")
+# # update todo element
+# async def update_todo(todo_id: int, item: TodoItem) -> dict:
+#     for todo in todo_list:
+#         if todo.id == todo_id:
+#             todo.item = item.item
+#             return {"message": f"Element {todo_id} updated correctly"}
+#     return {"message": f"Element with ID {todo_id} doesnt exist"}
 
 
 # @todo_routes.delete("/todo")

@@ -12,6 +12,7 @@
 /v5.0.10/css/all.css" integrity="sha384-
 +d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/
 OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -23,16 +24,28 @@ OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <div class="text-center">
             <form action="/todo" method="post">
                 <input type="text" name="item" value="{{ item }}" id="" required>
-                <button type="submit" class="btn btn-primary">+</button>
+                <button type="submit" class="btn btn-primary">Add Todo</button>
             </form>
         </div>
-        <div class="container text-center">
-            <ul>
+        <div class="container" style="max-width: 600px;">
+            <ul class="list-group">
                 {% for todo in todos %}
-                <li style="list-style: none;">{{todo.item}}</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="col-sm-10">{{ todo.item }}</div>
+                    <div class="col-sm-2 mt-2 mt-sm-0 text-right d-flex justify-content-end">
+                        <button class="btn btn-success btn-sm rounded-0 ml-1" type="button" data-toggle="tooltip"
+                            data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip"
+                            data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                    </div>
+                </li>
+                <br>
+                <br>
                 {% endfor %}
             </ul>
         </div>
+
+
     </div>
 
 </body>
