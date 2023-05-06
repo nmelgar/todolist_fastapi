@@ -45,31 +45,7 @@ OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
             </ul>
         </div>
 
-        <div class="text-center">
-            <form id="delete-form" action="{{ url_for('delete_all_todos') }}" method="post">
-                <button type="submit" class="btn btn-danger">Clear List</button>
-            </form>
-        </div>
-
-
-
-
     </div>
-    <script>
-        document.querySelector('#delete-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const response = await fetch(event.target.action, {
-                method: 'POST'
-            });
-            const json = await response.json();
-            if (json.success) {
-                document.querySelectorAll('#todo-list li').forEach(function (item) {
-                    item.remove();
-                });
-            }
-        });
-    </script>
-
 
 </body>
 

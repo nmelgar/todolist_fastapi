@@ -4,7 +4,7 @@ from typing import List, Optional
 
 
 class Todo(BaseModel):
-    id: Optional[int] = None
+    id: Optional[int]
     item: str
 
     @classmethod

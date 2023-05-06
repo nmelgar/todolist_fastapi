@@ -18,6 +18,7 @@ async def get_todo(todo_id: int) -> dict:
     return {"message": f"Element with ID {todo_id} doesnt exist"}
 
 
+# display all elements from the list
 @todo_routes.get("/todo")
 async def retrieve_todos(request: Request):
     return templates.TemplateResponse("todos.html", {
@@ -26,8 +27,8 @@ async def retrieve_todos(request: Request):
     })
 
 
+# add element to the list
 @todo_routes.post("/todo")
-# add todo element
 async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)):
     todo.id = len(todo_list) + 1
     todo_list.append(todo)
@@ -37,9 +38,9 @@ async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)):
     })
 
 
-@todo_routes.post("/todo")
-# delete all elements
-async def delete_all_todos(request: Request, todo: Todo = None):
+# delete all elements of the list
+@todo_routes.delete("/todo")
+async def delete_all_todos(request: Request):
     if not todo_list:
         return {"message": "Todo list is empty"}
     else:
@@ -48,16 +49,3 @@ async def delete_all_todos(request: Request, todo: Todo = None):
             "request": request,
             "todos": todo_list
         })
-    
-# @todo_routes.delete("/todo")
-# # delete all elements
-# async def delete_all_todos(request: Request):
-#     if not todo_list:
-#         return {"message": "Todo list is empty"}
-#     else:
-#         todo_list.clear()
-#         return templates.TemplateResponse("todos.html", {
-#             "request": request,
-#             "todos": todo_list
-#         })
-
