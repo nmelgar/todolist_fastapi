@@ -23,7 +23,7 @@ async def get_todo(todo_id: int) -> dict:
 
 @todo_routes.get("/todo")
 async def retrieve_todos(request: Request):
-    return templates.TemplateResponse("home.html", {
+    return templates.TemplateResponse("todos.html", {
         "request": request,
         "todos": todo_list
     })
@@ -31,9 +31,12 @@ async def retrieve_todos(request: Request):
 
 @todo_routes.post("/todo")
 # add todo element
-async def add_todo(todo: Todo) -> dict:
+async def add_todo(request: Request, todo: Todo = Depends(Todo.as_form)):
     todo_list.append(todo)
-    return {"message": "Todo added correctly"}
+    return templates.TemplateResponse("todos.html", {
+        "request": request,
+        "todos": todo_list
+    })
 
 
 @todo_routes.put("/todo/{todo_id}")
